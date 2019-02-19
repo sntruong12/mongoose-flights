@@ -1,0 +1,70 @@
+<%- include('../partials/header') %>
+
+  <h1>Flight Details</h1>
+  <table>
+    <tr>
+      <td>Airline</td>
+      <td><%= flight.airline %></td>
+    </tr>
+    <tr>
+      <td>Flight Number</td>
+      <td><%= flight.flightNo %></td>
+    </tr>
+    <tr>
+      <td>Departure Time</td>
+      <td><%= flight.departs %></td>
+    </tr>
+    <tr>
+      <td>Airport</td>
+      <td><%= flight.airport %></td>
+    </tr>
+  </table>
+
+  <h1>Destinations</h1>
+  <table>
+  <% flight.destinations.forEach(d => { %>
+    <tr>
+      <td>Airport: <%= d.airport %></td>
+      <td>Arrival Time: <%= d.arrival %></td>
+    </tr>
+  <% }) %>
+</table>
+
+  <h2>Add Destinations</h2>
+  <form action="/flights/<%= flight._id %>/destinations" method="POST">
+    <label>Destination</label>
+    <select name="airport">
+      <option value="AUS">AUS</option>
+      <option value="DAL">DAL</option>
+      <option value="LAX">LAX</option>
+      <option value="SEA">SEA</option>
+    </select>
+    <label>Departure Time</label>
+    <input type="datetime-local" name="arrival">
+    <input type="submit" value="Add Destination">
+  </form>
+
+  <a href="/flights/<%= flight._id %>/new">Create a ticket for this flight</a>
+
+  <h2>Tickets</h2>
+  <table>
+    <tr>
+      <th>Seat</th>
+      <th>Price</th>
+    </tr>
+    <% if (tickets.length === 0) { %>
+    <tr>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <% } else { %>
+    <% tickets.forEach(t => { %>  
+    <tr>
+      <td><%= t.seat %></td>
+      <td><%= t.price %></td>
+    </tr>
+    <% }) %>
+    <% } %>
+  </table>
+
+<%- include('../partials/footer') %>

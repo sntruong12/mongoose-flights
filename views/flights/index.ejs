@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+
+<table>
+  <tr>
+    <th>Departure Time</th>
+    <th>Airline</th>
+    <th>Flight #</th>
+    <th>See Info</th>
+  </tr>
+  <% flights.forEach((f) => { %>
+  <tr>
+    <td><%= f.departs %></td>
+    <td><%= f.airline %></td>
+    <td><%= f.flightNo %></td>
+    <td><a href="/flights/<%= f._id %>">details</a></td>
+  </tr>
+  <% }) %>
+</table>
+
+<%- include('../partials/footer') %>
